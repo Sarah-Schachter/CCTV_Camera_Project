@@ -338,8 +338,3 @@ void backend()
 	}
 }
 
-int main() {
-	camera(R"(C:\WIN_20230913_10_29_15_Pro.mp4)");
-	backend();
-	return 1;
-}
