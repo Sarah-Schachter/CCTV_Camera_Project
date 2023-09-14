@@ -40,3 +40,5 @@
 /CameraProject/*.user
 /packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.6
 /CameraProject/x64/Debug
+/CameraProject/results.csv
+/CameraLibrary/config_files
