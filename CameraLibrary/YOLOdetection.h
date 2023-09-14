@@ -2,7 +2,8 @@
 #include <vector>
 #include <string>
 #include <fstream>
-#include "../CameraLibrary/Includes.h"
+#include "./Detection.h"
+#include "Detection.h"
 #include "opencv2/opencv.hpp"
 #ifdef _DEBUG
 #pragma comment(lib,"opencv_world480d.lib")

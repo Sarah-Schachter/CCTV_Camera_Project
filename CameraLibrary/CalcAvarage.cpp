@@ -1,9 +1,10 @@
 #include "pch.h"
 #include "CalcAvarage.h"
 
+using namespace std;
+using namespace cv;
 
-
-#pragma region Task 4 calc and save to csv average color
+#pragma region Milestone1 Task 4 calc and save to csv average color
 
 void calcAverageColor(const cv::Mat& image, double& avgR, double& avgG, double& avgB)
 {

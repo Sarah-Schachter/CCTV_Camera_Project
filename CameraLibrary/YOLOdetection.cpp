@@ -6,7 +6,6 @@ std::vector<std::string> load_class_list()
 {
 	std::vector <std::string> class_list;
 	std::ifstream ifs(CLASS_LIST_PATH);
-	//ifstream ifs(R"(.\config_files\classes.txt)");
 	std::string line;
 	while (getline(ifs, line))
 	{
@@ -19,7 +18,6 @@ std::vector<std::string> load_class_list()
 void load_net(cv::dnn::Net& net)
 {
 	net = cv::dnn::readNet(YOLO_PATH);
-	//net = cv::dnn::readNet(R"(.\config_files\yolov5s.onnx)");
 }
 
 

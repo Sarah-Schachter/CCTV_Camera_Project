@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Program.cpp"
+#include "../../CameraLibrary/Program.cpp"
 
 TEST(TestCaseName, TestName) {
   EXPECT_EQ(1, 1);
