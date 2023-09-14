@@ -1,12 +1,12 @@
 #include "pch.h"
-#include "Try.cpp"
+#include "Program.cpp"
 
 TEST(TestCaseName, TestName) {
   EXPECT_EQ(1, 1);
   EXPECT_TRUE(true);
 }
 int main() {
-	camera(R"(C:\WIN_20230913_10_29_15_Pro.mp4)");
+	camera(VIDEO_PATH);
 	backend();
 	return 1;
 }
