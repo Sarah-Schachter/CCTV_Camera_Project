@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "CameraFunctions.h"
 
 #pragma region task 2 miryam check differences

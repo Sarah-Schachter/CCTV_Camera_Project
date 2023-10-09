@@ -1,5 +1,3 @@
-
-#include "pch.h"
 #include "opencv2/opencv.hpp"
 #include <vector>
 #include <string>
@@ -63,7 +61,7 @@ void backend()
 	cv::dnn::Net net;
 	load_net(net);
 
-	auto start = std::chrono::high_resolution_clock::now();
+	auto start = std::chrono::steady_clock::now();
 
 	int frame_count = 0;
 	float fps = -1;
@@ -90,3 +88,9 @@ void backend()
 	}
 }
 
+int main()
+{
+	camera(VIDEO_PATH);
+	backend();
+	return 1;
+}

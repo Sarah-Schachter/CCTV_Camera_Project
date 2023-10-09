@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "CalcAvarage.h"
 
 using namespace std;
@@ -33,7 +32,13 @@ void saveToCSV(const std::string& filename, const Detection& detection, double a
 	time_t currentTime = time(nullptr);
 	// Convert the time to a string
 	char timeString[26];
+
+#ifdef _WIN32
 	ctime_s(timeString, sizeof(timeString), &currentTime);
+#else
+	time_t rawTime = currentTime;
+	ctime_r(&rawTime, timeString);
+#endif
 
 	// Write detection details and average color values
 	file << timeString << detection.box.y << ", " << detection.box.x << ", " << detection.box.width << ", " << detection.box.height
