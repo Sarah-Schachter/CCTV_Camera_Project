@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "YOLOdetection.h"
 
 
@@ -130,10 +129,10 @@ std::vector<Detection> detectOne(cv::Mat frame, std::vector<std::string> class_l
 
 	if (frame_count >= 30)
 	{
-		auto end = std::chrono::high_resolution_clock::now();
+		auto end = std::chrono::steady_clock::now();
 		fps = frame_count * 1000.0 / std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 		frame_count = 0;
-		start = std::chrono::high_resolution_clock::now();
+		start = std::chrono::steady_clock::now();
 	}
 
 	if (fps > 0)
