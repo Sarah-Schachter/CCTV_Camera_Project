@@ -1,4 +1,3 @@
-
 # Add source files
 set(SOURCES
     CalcAvarage.cpp
@@ -17,25 +16,18 @@ set(HEADERS
 )
 
 # Create the executable
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} "../sqlite_files/sqlite3.c")
 
-# include opencv
-if(WIN32)
-    set(OpenCV_DIR "C:\\opencv\\build")
-endif()
+# Find and include OpenCV
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-add_subdirectory("../sqlite_files" "build/sqlite_files")
-include_directories("../sqlite_files")
-target_link_libraries(${PROJECT_NAME} PRIVATE sqlite3)
-
-
-
-
-
-link_directories(${OpenCV_LIBRARY_DIRS})
+# Link OpenCV libraries
 target_link_libraries(${PROJECT_NAME} PUBLIC ${OpenCV_LIBS})
 
-
+# Include OpenCv
+if(WIN32)
+    set(OpenCV_DIR "C:\\opencv\\build")
+endif()
+link_directories(${OpenCV_LIBRARY_DIRS})
 
