@@ -25,6 +25,15 @@ if(WIN32)
 endif()
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
+
+add_subdirectory("../sqlite_files" "build/sqlite_files")
+include_directories("../sqlite_files")
+target_link_libraries(${PROJECT_NAME} PRIVATE sqlite3)
+
+
+
+
+
 link_directories(${OpenCV_LIBRARY_DIRS})
 target_link_libraries(${PROJECT_NAME} PUBLIC ${OpenCV_LIBS})
 
