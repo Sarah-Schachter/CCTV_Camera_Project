@@ -1,3 +1,4 @@
+
 #include "opencv2/opencv.hpp"
 #include <vector>
 #include <string>
@@ -9,6 +10,8 @@
 #include "./CalcAvarage.h"
 #include "./CameraFunctions.h"
 #include "./Detection.h"
+#include "catch.hpp"
+
 
 #ifdef _DEBUG
 #pragma comment(lib,"opencv_world480d.lib")
@@ -88,9 +91,17 @@ void backend()
 	}
 }
 
-int main()
+
+TEST_CASE("main test", "[detection]") 
 {
 	camera(VIDEO_PATH);
 	backend();
-	return 1;
+	
 }
+
+//int main()
+//{
+//	camera(VIDEO_PATH);
+//	backend();
+//	return 1;
+//}
