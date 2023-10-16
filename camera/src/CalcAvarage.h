@@ -1,8 +1,9 @@
 #pragma once
 #include <fstream>
 #include "./Detection.h"
-#include "opencv2/opencv.hpp"
+#include "../sqlite_files/sqlite3.h"
 
+#include "opencv2/opencv.hpp"
 #ifdef _DEBUG
 #pragma comment(lib,"opencv_world480d.lib")
 #else
@@ -14,3 +15,4 @@
 void calcAverageColor(const cv::Mat& image, double& avgR, double& avgG, double& avgB);
 void saveToCSV(const std::string& filename, const Detection& detection, double avgR, double avgG, double avgB);
 void calcSaveDetectoins(cv::Mat currentFrame, std::vector<Detection> detections);
+int saveToDB(const Detection& detection, double avgR, double avgG, double avgB);
