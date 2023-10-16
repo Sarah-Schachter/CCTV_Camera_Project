@@ -41,6 +41,7 @@
 **/build/
 **/CMakeFiles/
 **/config_files/
+**/spdlog
 
 
 **/CMakeCache.txt

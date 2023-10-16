@@ -1,4 +1,8 @@
-
+//#define CATCH_CONFIG_MAIN
+//#include "catch.hpp"
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/stdout_sinks-inl.h>
+#include <spdlog/sinks/basic_file_sink.h>
 #include "opencv2/opencv.hpp"
 #include <vector>
 #include <string>
@@ -10,8 +14,6 @@
 #include "./CalcAvarage.h"
 #include "./CameraFunctions.h"
 #include "./Detection.h"
-#include "catch.hpp"
-
 
 #ifdef _DEBUG
 #pragma comment(lib,"opencv_world480d.lib")
@@ -92,16 +94,23 @@ void backend()
 }
 
 
-TEST_CASE("main test", "[detection]") 
-{
-	camera(VIDEO_PATH);
-	backend();
-	
-}
-
-//int main()
+//TEST_CASE("main test", "[detection]") 
 //{
 //	camera(VIDEO_PATH);
 //	backend();
-//	return 1;
+//	
 //}
+
+int main()
+{
+	auto logger = spdlog::stdout_logger_mt("console");
+	auto file_logger = spdlog::basic_logger_mt("file", "logs.txt");
+	//// Log a message
+	file_logger->info("Hello, spdlog!");
+
+
+	camera(VIDEO_PATH);
+	backend();
+	
+	return 1;
+}

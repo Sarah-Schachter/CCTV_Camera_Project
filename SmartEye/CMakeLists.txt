@@ -1,11 +1,13 @@
 ﻿cmake_minimum_required (VERSION 3.16.0)
 
-project ("camera")
+project ("SmartEye")
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_subdirectory(src)
+add_subdirectory(CodeFiles)
 
 add_subdirectory(sqlite_files)
 
-# add_subdirectory(Catch2)
+add_subdirectory(spdlog)
+
+add_subdirectory(Tests)
