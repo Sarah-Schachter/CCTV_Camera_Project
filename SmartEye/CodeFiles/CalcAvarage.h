@@ -1,7 +1,7 @@
 #pragma once
 #include <fstream>
 #include "./Detection.h"
-#include "../sqlite_files/sqlite3.h"
+#include "sqlite_files/sqlite3.h"
 
 #include "opencv2/opencv.hpp"
 #ifdef _DEBUG
