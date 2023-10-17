@@ -33,35 +33,24 @@
 
 
 
-
-
-
 # after cmake
-/.vs
+**/.vs
 **/build/
 **/CMakeFiles/
 **/config_files/
-
 
 **/CMakeCache.txt
 **/cmake_install.cmake
 **/Makefile
 
-**/*.vcxproj.filters
-**/*.vcxproj
-
-
 #**/cmake-build-debug
 
 #**/install_manifest.txt
-#**/CMakeFiles/
 #**/CTestTestfile.cmake
 #**/Makefile
 #**/*.cbp
 #**/CMakeScripts
 #**/compile_commands.json
-#
-#
 #/CMake
 
 
