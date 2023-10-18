@@ -113,6 +113,7 @@ int saveToDB(const Detection& detection, double avgR, double avgG, double avgB) 
     sqlite3_finalize(statement);
     sqlite3_close(db);
     return(1);
+
 }
 
 //////--------------------------------------/////////////////

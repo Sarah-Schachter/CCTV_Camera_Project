@@ -38,3 +38,4 @@ target_link_libraries(${PROJECT_NAME} PUBLIC ${OpenCV_LIBS})
 set(SPDLOG_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR} "../spdlog/include")
 
 include_directories(${SPDLOG_INCLUDE_DIR})
+

@@ -91,15 +91,12 @@ void backend()
 	}
 }
 
+
 int main()
 {
 	auto file_logger = spdlog::basic_logger_mt("file", "logs.txt");
-	//// Log a message
 	file_logger->info("Hello, spdlog!");
-
 	camera(VIDEO_PATH);
 	backend();
 	return 1;
 }
-
-

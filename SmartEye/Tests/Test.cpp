@@ -5,7 +5,3 @@
      REQUIRE(2 + 2 == 4);
      REQUIRE(3 * 4 == 12);
  }
-
-//int main(){
-//    return 1;
-//}

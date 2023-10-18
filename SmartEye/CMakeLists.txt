@@ -10,7 +10,3 @@ add_subdirectory(Tests)
 
 add_subdirectory(spdlog)
 
-# add_subdirectory(sqlite_files)
-
-
-

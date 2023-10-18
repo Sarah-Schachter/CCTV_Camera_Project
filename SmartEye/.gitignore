@@ -31,8 +31,6 @@
 *.out
 *.app
 
-
-
 # after cmake
 **/.vs
 **/build/
@@ -44,14 +42,5 @@
 **/cmake_install.cmake
 **/Makefile
 
-#**/cmake-build-debug
-
-#**/install_manifest.txt
-#**/CTestTestfile.cmake
-#**/Makefile
-#**/*.cbp
-#**/CMakeScripts
-#**/compile_commands.json
-#/CMake
 
 
