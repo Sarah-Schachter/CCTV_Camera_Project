@@ -1,11 +1,11 @@
 #define CATCH_CONFIG_MAIN
-// #include "catch.hpp"
+#include "catch.hpp"
 
-// TEST_CASE("Example Test Case", "[example]") {
-//     REQUIRE(2 + 2 == 4);
-//     REQUIRE(3 * 4 == 12);
-// }
+ TEST_CASE("Example Test Case", "[example]") {
+     REQUIRE(2 + 2 == 4);
+     REQUIRE(3 * 4 == 12);
+ }
 
-int main(){
-    return 1;
-}
+//int main(){
+//    return 1;
+//}

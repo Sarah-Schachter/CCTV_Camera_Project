@@ -1,3 +1,6 @@
+#include <spdlog/sinks/stdout_sinks-inl.h>
+#include <spdlog/sinks/basic_file_sink.h>
+#include <spdlog/spdlog.h>
 #include "opencv2/opencv.hpp"
 #include <vector>
 #include <string>
@@ -90,6 +93,10 @@ void backend()
 
 int main()
 {
+	auto file_logger = spdlog::basic_logger_mt("file", "logs.txt");
+	//// Log a message
+	file_logger->info("Hello, spdlog!");
+
 	camera(VIDEO_PATH);
 	backend();
 	return 1;

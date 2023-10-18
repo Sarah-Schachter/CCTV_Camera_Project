@@ -28,8 +28,13 @@ add_subdirectory(sqlite_files)
 if(WIN32)
     set(OpenCV_DIR "C:\\opencv\\build")
 endif()
-
+link_directories(${OpenCV_LIBRARY_DIRS})
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
-link_directories(${OpenCV_LIBRARY_DIRS})
+
 target_link_libraries(${PROJECT_NAME} PUBLIC ${OpenCV_LIBS})
+
+##################### spdlog #######################
+set(SPDLOG_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR} "../spdlog/include")
+
+include_directories(${SPDLOG_INCLUDE_DIR})
