@@ -1,9 +1,13 @@
+#include "Logger.h"
 #include "CameraFunctions.h"
+
+
 
 #pragma region task 2 miryam check differences
 
 bool isTheSameFrame(cv::Mat prev, cv::Mat current)
 {
+	Logging::getFile()->info("hiiii");
 	int countChangePix = 100;
 	// Loop through all pixels
 	for (int row = 0; row < prev.rows; row++)

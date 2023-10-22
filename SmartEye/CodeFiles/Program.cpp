@@ -8,10 +8,12 @@
 #include <fstream>
 #include <ctime>
 #include <iostream>
+#include "Logger.h"
 #include "./YOLOdetection.h"
 #include "./CalcAvarage.h"
 #include "./CameraFunctions.h"
 #include "./Detection.h"
+
 
 #ifdef _DEBUG
 #pragma comment(lib,"opencv_world480d.lib")
@@ -57,6 +59,7 @@ void camera(string path)
 
 void backend()
 {
+	Logging::getFile()->info("hiiii");
 	cv::Mat frame;
 	vector <Detection> detections;
 
