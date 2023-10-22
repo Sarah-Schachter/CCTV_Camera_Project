@@ -8,5 +8,3 @@ add_subdirectory(CodeFiles)
 
 add_subdirectory(Tests)
 
-#add_subdirectory(spdlog)
-

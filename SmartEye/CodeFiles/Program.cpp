@@ -1,6 +1,3 @@
-//#include <spdlog/sinks/stdout_sinks-inl.h>
-//#include <spdlog/sinks/basic_file_sink.h>
-//#include <spdlog/spdlog.h>
 #include "opencv2/opencv.hpp"
 #include <vector>
 #include <string>
@@ -76,14 +73,13 @@ void backend()
 	while (!frameQueue.empty())
 	{
 		// pop from Q
-
 		frame = frameQueue.front();
 
-		// call function detect from YOLO - Sara
+		// call function detect from YOLO and draw rectangles around objects
 		detections = detectOne(frame, class_list, net, start, frame_count, fps, total_frames);
 		frameQueue.pop();
 
-		// call func calc amd save Average - Racheli
+		// call func calc amd save Average
 		calcSaveDetectoins(frame, detections);
 
 		if (cv::waitKey(1) != -1)

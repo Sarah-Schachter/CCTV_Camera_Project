@@ -15,7 +15,6 @@ void calcAverageColor(const cv::Mat& image, double& avgR, double& avgG, double& 
 
 
 // Save to SQLite DB
-
 int saveToDB(const Detection& detection, double avgR, double avgG, double avgB)
 {
 	sqlite3* db;
@@ -91,14 +90,15 @@ int saveToDB(const Detection& detection, double avgR, double avgG, double avgB)
 
 void calcSaveDetectoins(cv::Mat currentFrame, std::vector<Detection> detections)
 {
-	for (const Detection& detection : detections) {
+	for (const Detection& detection : detections)
+	{
 		double avgRectR, avgRectG, avgRectB;
 		cv::Mat detectionROI = currentFrame(detection.box); // get the small image of the detection area only
+
 		calcAverageColor(detectionROI, avgRectR, avgRectG, avgRectB);
 		saveToDB(detection, avgRectR, avgRectG, avgRectB);
 	}
 }
-
 #pragma endregion
 
 

@@ -3,6 +3,7 @@
 #include <opencv2/opencv.hpp>
 
 
+// Test case for calcAverageColor function
 TEST_CASE("calcAverageColor calculates the average color correctly", "[calcAverageColor]")
 {
 	cv::Mat image(3, 3, CV_8UC3, cv::Scalar(200, 150, 100));

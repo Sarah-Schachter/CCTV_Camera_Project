@@ -32,7 +32,6 @@
 *.app
 
 # after cmake
-**/.vs
 **/build/
 **/CMakeFiles/
 **/config_files/
@@ -41,6 +40,10 @@
 **/CMakeCache.txt
 **/cmake_install.cmake
 **/Makefile
+
+# workspace files
+**/.vs
+**/.vscode
 
 
 

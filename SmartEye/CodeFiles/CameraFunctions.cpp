@@ -2,8 +2,7 @@
 #include "CameraFunctions.h"
 
 
-
-#pragma region task 2 miryam check differences
+#pragma region milestone 1 task 2 check differences
 
 bool isTheSameFrame(cv::Mat prev, cv::Mat current)
 {

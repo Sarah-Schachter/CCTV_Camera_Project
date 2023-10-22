@@ -29,33 +29,27 @@ add_subdirectory(sqlite_files)
 
 if(WIN32)
     set(OpenCV_DIR "C:\\opencv\\build")  
-    set(SPDLOG_DIR "C:\\spdlog\\include")
-else()
-    find_package(spdlog REQUIRED)
 endif()
 link_directories(${OpenCV_LIBRARY_DIRS})
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
-
 target_link_libraries(${PROJECT_NAME} PUBLIC ${OpenCV_LIBS})
-if(WIN32)
-   include_directories([AFTER|BEFORE] [SYSTEM] ${SPDLOG_DIR})
-else()
-   target_link_libraries(${PROJECT_NAME} PRIVATE spdlog::spdlog)
-endif()
-
-
-
-
-
-
-
-
 
 
 
 ##################### spdlog #######################
-set(SPDLOG_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR} "../spdlog/include")
 
-include_directories(${SPDLOG_INCLUDE_DIR})
+if(WIN32)
+    set(SPDLOG_DIR "C:\\spdlog\\include")
+    include_directories([AFTER|BEFORE] [SYSTEM] ${SPDLOG_DIR})
+else()
+    set(SPDLOG_DIR "/mnt/c/spdlog/include")
+    include_directories([AFTER|BEFORE] [SYSTEM] ${SPDLOG_DIR})
 
+    #find_package(spdlog REQUIRED)
+    #target_link_libraries(${PROJECT_NAME} PRIVATE spdlog::spdlog)
+endif()
+
+
+#set(SPDLOG_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR} "../spdlog/include")
+#include_directories(${SPDLOG_INCLUDE_DIR})
