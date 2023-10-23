@@ -1,13 +1,13 @@
 set(TEST_SOURCES
     calcAverageTest.cpp
-    SameFrame_Test.cpp
+    sameFrameTest.cpp
 )
 
-add_executable(Tests ${TEST_SOURCES} "../CodeFiles/sqlite_files/sqlite3.c")
+add_executable(Tests ${TEST_SOURCES} "../smart_eye/sqlite_files/sqlite3.c")
 
 
 # Link the main project library
-target_link_libraries(Tests PRIVATE CodeFiles)
+target_link_libraries(Tests PRIVATE smartEye_lib)
 
 ##################### opencv #######################
 if(WIN32)

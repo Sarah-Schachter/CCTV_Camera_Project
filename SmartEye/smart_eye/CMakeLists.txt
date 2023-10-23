@@ -1,26 +1,26 @@
 # Add source files
 set(SOURCES
-    CalcAvarage.cpp
-    CameraFunctions.cpp
-    Program.cpp
+    calcAvarage.cpp
+    cameraFunctions.cpp
+    program.cpp
     YOLOdetection.cpp
-    Logger.cpp
+    logger.cpp
 )
 
 # Add header files
 set(HEADERS
-    CalcAvarage.h
-    CameraFunctions.h
-    Detection.h
+    calcAvarage.h
+    cameraFunctions.h
+    detection.h
     YOLOdetection.h
     framework.h
-    Logger.h
+    logger.h
 )
 
 # Create the executable
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} "sqlite_files/sqlite3.c")
 
-add_library(CodeFiles ${SOURCES} ${HEADERS})
+add_library(smartEye_lib ${SOURCES} ${HEADERS})
 
 add_subdirectory(sqlite_files)
 

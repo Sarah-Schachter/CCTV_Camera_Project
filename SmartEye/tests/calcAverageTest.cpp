@@ -1,5 +1,5 @@
 #include "catch.hpp"
-#include "../CodeFiles/CalcAvarage.h"
+#include "../smart_eye/calcAvarage.h"
 #include <opencv2/opencv.hpp>
 
 

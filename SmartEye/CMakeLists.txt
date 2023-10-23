@@ -4,7 +4,8 @@ project (SmartEye)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_subdirectory(CodeFiles)
+add_subdirectory(smart_eye)
 
-add_subdirectory(Tests)
+add_subdirectory(tests)
+
 
