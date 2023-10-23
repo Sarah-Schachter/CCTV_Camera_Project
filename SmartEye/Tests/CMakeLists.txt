@@ -1,6 +1,6 @@
 set(TEST_SOURCES
-    Test.cpp
     calcAverageTest.cpp
+    SameFrame_Test.cpp
 )
 
 add_executable(Tests ${TEST_SOURCES} "../CodeFiles/sqlite_files/sqlite3.c")
