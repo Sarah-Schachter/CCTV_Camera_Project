@@ -1,7 +1,6 @@
 #include "opencv2/opencv.hpp"
 #include <vector>
 #include <string>
-#include <queue>
 #include <fstream>
 #include <ctime>
 #include <iostream>
@@ -21,42 +20,48 @@
 using namespace std;
 using namespace cv;
 
-ThreadSafeQueue <cv::Mat> frameQueue; 
+
+ThreadSafeQueue <cv::Mat> frameQueue;
+
 
 void camera(string path)
 {
+	Logging::getFile()->info("camera begin");
+
 	Mat frame;
 	VideoCapture capture(path);
+
 	if (!capture.isOpened())
 	{
-		cout << "Cannot open the video file. \n";
+		Logging::getFile()->error("ERROR: Cannot open the video file in path \"" + path + "\"");
 		return;
 	}
 
 	while (true)
 	{
-		// extract next image
 		capture.read(frame);
+
 		if (frame.empty())
 		{
-			cout << "End of stream\n";
+			Logging::getFile()->info("End of stream");
 			break;
 		}
-		else {
-			// if frame isn't like the previous push it to Q
-			if (frameQueue.empty())
-				frameQueue.push(frame.clone());
-			else if (!isTheSameFrame(frame, frameQueue.back()))
-				frameQueue.push(frame.clone());
-		}
+
+		// push frame to Q
+		if (frameQueue.empty() || !isTheSameFrame(frame, frameQueue.back()))
+			frameQueue.push(frame.clone());
+
+		cv::waitKey(333);
 	}
+
 	capture.release();
+	Logging::getFile()->info("camera finished\n");
 }
 
 
 void backend()
 {
-	Logging::getFile()->info("hiiii");
+	Logging::getFile()->info("backend begin");
 	cv::Mat frame;
 	vector <Detection> detections;
 
@@ -74,27 +79,26 @@ void backend()
 	{
 		// pop from Q
 		frame = frameQueue.front();
-
-		// call function detect from YOLO and draw rectangles around objects
-		detections = detectOne(frame, class_list, net, start, frame_count, fps, total_frames);
 		frameQueue.try_pop();
 
-		// call func calc amd save Average
+		// detect objects and draw rectangles around 
+		detections = detectOne(frame, class_list, net, start, frame_count, fps, total_frames);
+
+		// calc amd save Average
 		calcSaveDetectoins(frame, detections);
 
 		if (cv::waitKey(1) != -1)
 		{
-			cout << "finished by user\n";
+			Logging::getFile()->info("finished by user");
 			break;
 		}
 	}
+	Logging::getFile()->info("backend finished\n");
 }
 
 
 int main()
 {
-	//auto file_logger = spdlog::basic_logger_mt("file", "logs.txt");
-	//file_logger->info("Hello, spdlog!");
 	camera(VIDEO_PATH);
 	backend();
 	return 1;

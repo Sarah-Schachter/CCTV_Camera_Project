@@ -66,7 +66,6 @@ void detect(cv::Mat& image, cv::dnn::Net& net, std::vector<Detection>& output, c
 		// Retrieve the confidence score for the detection
 		float confidence = data[4];
 
-		// Check if the confidence is above the threshold
 		if (confidence >= CONFIDENCE_THRESHOLD)
 		{
 			// Retrieve the class scores for the detection
@@ -78,7 +77,6 @@ void detect(cv::Mat& image, cv::dnn::Net& net, std::vector<Detection>& output, c
 			// Find the class with the highest score
 			minMaxLoc(scores, 0, &max_class_score, 0, &class_id);
 
-			// Check if the maximum class score is above the threshold
 			if (max_class_score > SCORE_THRESHOLD)
 			{
 				// Store the detection information
@@ -99,7 +97,7 @@ void detect(cv::Mat& image, cv::dnn::Net& net, std::vector<Detection>& output, c
 				boxes.push_back(cv::Rect(left, top, width, height));
 			}
 		}
-		// Move to the next detection in the output data
+		// Move to the next detection
 		data += 85;
 	}
 	// Apply non-maximum suppression to remove overlapping detections
@@ -120,9 +118,8 @@ void detect(cv::Mat& image, cv::dnn::Net& net, std::vector<Detection>& output, c
 }
 
 
-// check why we need to know the frame rate
 // Perform object detection on a single frame and draw 
-std::vector<Detection> detectOne(cv::Mat& frame, const std::vector<std::string>& class_list, cv::dnn::Net& net, std::chrono::steady_clock::time_point start, int frame_count, float fps, int total_frames)
+std::vector <Detection> detectOne(cv::Mat& frame, const std::vector<std::string>& class_list, cv::dnn::Net& net, std::chrono::steady_clock::time_point start, int& frame_count, float& fps, int& total_frames)
 {
 	std::vector<Detection> output;
 
@@ -150,7 +147,7 @@ std::vector<Detection> detectOne(cv::Mat& frame, const std::vector<std::string>&
 		cv::putText(frame, class_list[classId].c_str(), cv::Point(box.x, box.y - 5), cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 0));
 	}
 
-	// Check if the frame count has reached a value of 30
+	// calculate prame per second speed
 	if (frame_count >= 30)
 	{
 		auto end = std::chrono::steady_clock::now();
@@ -159,7 +156,7 @@ std::vector<Detection> detectOne(cv::Mat& frame, const std::vector<std::string>&
 		start = std::chrono::steady_clock::now();
 	}
 
-	// Check if the calculated frames per second (fps) is greater than 0
+	// print prame per second speed
 	if (fps > 0)
 	{
 		std::ostringstream fps_label;
@@ -169,10 +166,9 @@ std::vector<Detection> detectOne(cv::Mat& frame, const std::vector<std::string>&
 		cv::putText(frame, fps_label_str.c_str(), cv::Point(10, 25), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255), 2);
 	}
 
-	// Display the frame with the detected objects and overlays in a window titled "output"
+	// Display frame the detected objects
 	cv::imshow("output", frame);
 
-	// Return the vector containing the detected objects and their information
 	return output;
 }
 

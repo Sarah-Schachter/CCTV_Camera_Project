@@ -3,6 +3,7 @@
 #include <opencv2/opencv.hpp>
 #include "../smart_eye/cameraFunctions.h"
 #include "../config_files/config.h"
+
 // Test case to check if two identical frames are treated as the same
  TEST_CASE("Identical Frames", "[FrameComparison]") {
      cv::Mat prevFrame;

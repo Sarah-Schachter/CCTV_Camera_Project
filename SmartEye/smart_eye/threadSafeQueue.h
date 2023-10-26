@@ -13,18 +13,21 @@
 
 
 template <typename T>
-class ThreadSafeQueue {
+class ThreadSafeQueue
+{
 public:
-    void push(const T& item);
-    bool empty() const;
-    bool try_pop();
-    T back();
-    T front();
+	void push(const T& item);
+	bool empty() const;
+	bool try_pop();
+	T back();
+	T front();
 
 private:
-    std::queue<T> queue_;
-    mutable std::mutex mutex_;
+	std::queue<T> queue_;
+	int size = 0;
+	mutable std::mutex mutex_;
 };
 
 template class ThreadSafeQueue<cv::Mat>;
 
+template class ThreadSafeQueue<int>;
