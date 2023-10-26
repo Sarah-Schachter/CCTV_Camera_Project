@@ -10,7 +10,7 @@
 #include "./CalcAvarage.h"
 #include "./CameraFunctions.h"
 #include "./Detection.h"
-
+#include "./threadSafeQueue.h"
 
 #ifdef _DEBUG
 #pragma comment(lib,"opencv_world480d.lib")
@@ -21,7 +21,7 @@
 using namespace std;
 using namespace cv;
 
-queue<cv::Mat> frameQueue;
+ThreadSafeQueue <cv::Mat> frameQueue; 
 
 void camera(string path)
 {
@@ -77,7 +77,7 @@ void backend()
 
 		// call function detect from YOLO and draw rectangles around objects
 		detections = detectOne(frame, class_list, net, start, frame_count, fps, total_frames);
-		frameQueue.pop();
+		frameQueue.try_pop();
 
 		// call func calc amd save Average
 		calcSaveDetectoins(frame, detections);
