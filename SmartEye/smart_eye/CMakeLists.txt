@@ -5,7 +5,11 @@ set(SOURCES
     program.cpp
     YOLOdetection.cpp
     logger.cpp
+    backendThread.cpp
+     cameraThread.cpp
     threadSafeQueue.cpp
+
+
 )
 
 # Add header files
@@ -16,6 +20,8 @@ set(HEADERS
     YOLOdetection.h
     framework.h
     logger.h
+    backendThread.h
+    cameraThread.h
     threadSafeQueue.h
 )
 
