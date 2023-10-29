@@ -2,6 +2,7 @@
 #include <queue>
 #include <mutex>
 #include "opencv2/opencv.hpp"
+#include <condition_variable>
 
 
 #ifdef _DEBUG
@@ -18,15 +19,21 @@ class ThreadSafeQueue
 public:
 	void push(const T& item);
 	bool empty() const;
-	bool try_pop();
+	T try_pop();
 	T back();
 	T front();
-
+	int size = 0;
 private:
 	std::queue<T> queue_;
-	int size = 0;
 	mutable std::mutex mutex_;
+	std::condition_variable cond_;
+	size_t capacity_ = 5;
+
+	/*std::queue<T> queue_;
+	mutable std::mutex mutex_;
+	std::condition_variable cond_;*/
 };
+
 
 template class ThreadSafeQueue<cv::Mat>;
 

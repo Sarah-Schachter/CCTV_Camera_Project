@@ -1,6 +1,5 @@
 #include "backendThread.h"
 
-
 using namespace std;
 using namespace cv;
 
