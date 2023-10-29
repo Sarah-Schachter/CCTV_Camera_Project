@@ -6,7 +6,7 @@ set(SOURCES
     YOLOdetection.cpp
     logger.cpp
     backendThread.cpp
-     cameraThread.cpp
+    cameraThread.cpp
     threadSafeQueue.cpp
 
 

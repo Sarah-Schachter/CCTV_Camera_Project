@@ -3,8 +3,7 @@
 using namespace std;
 using namespace cv;
 
-void backendThreadFunction(ThreadSafeQueue<cv::Mat> &frameQueue)
-
+void backendThreadFunction(ThreadSafeQueue<cv::Mat>& frameQueue)
 {
 	Logging::getFile()->info("backend begin");
 	cv::Mat frame;

@@ -3,7 +3,7 @@
 using namespace std;
 
 
-void cameraThreadFunction(std::string path, ThreadSafeQueue<cv::Mat> &frameQueue)
+void cameraThreadFunction(std::string path, ThreadSafeQueue<cv::Mat>& frameQueue)
 {
 	Logging::getFile()->info("camera begin");
 
@@ -16,9 +16,9 @@ void cameraThreadFunction(std::string path, ThreadSafeQueue<cv::Mat> &frameQueue
 		return;
 	}
 
+	// extract frames and push to q
 	while (true)
 	{
-		// extract next image
 		capture.read(frame);
 
 		if (frame.empty())
@@ -27,7 +27,6 @@ void cameraThreadFunction(std::string path, ThreadSafeQueue<cv::Mat> &frameQueue
 			break;
 		}
 
-		// push frame to Q
 		if (frameQueue.empty() || !isTheSameFrame(frame, frameQueue.back()))
 			frameQueue.push(frame.clone());
 
