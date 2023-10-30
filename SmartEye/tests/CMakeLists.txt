@@ -1,13 +1,14 @@
 set(TEST_SOURCES
     calcAverageTest.cpp
     sameFrameTest.cpp
+    threadSafeQueueTest.cpp
 )
 
 add_executable(Tests ${TEST_SOURCES} "../smart_eye/sqlite_files/sqlite3.c")
 
 
 # Link the main project library
-target_link_libraries(Tests PRIVATE smartEye_lib)
+target_link_libraries(Tests PRIVATE SmartEye_lib)
 
 ##################### opencv #######################
 if(WIN32)

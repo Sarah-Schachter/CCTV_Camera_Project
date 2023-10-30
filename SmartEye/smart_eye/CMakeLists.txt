@@ -5,6 +5,11 @@ set(SOURCES
     program.cpp
     YOLOdetection.cpp
     logger.cpp
+    backendThread.cpp
+    cameraThread.cpp
+    threadSafeQueue.cpp
+
+
 )
 
 # Add header files
@@ -15,12 +20,15 @@ set(HEADERS
     YOLOdetection.h
     framework.h
     logger.h
+    backendThread.h
+    cameraThread.h
+    threadSafeQueue.h
 )
 
 # Create the executable
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} "sqlite_files/sqlite3.c")
 
-add_library(smartEye_lib ${SOURCES} ${HEADERS})
+add_library(SmartEye_lib ${SOURCES} ${HEADERS})
 
 add_subdirectory(sqlite_files)
 
