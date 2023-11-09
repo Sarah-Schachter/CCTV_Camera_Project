@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package image_proto;
+
+service CameraService {
+  rpc SendImage (ImageRequest) returns (ImageResponse) {}
+}
+
+message ImageRequest {
+  bytes image_data = 1;
+}
+
+message ImageResponse {
+  bool success = 1;
+}

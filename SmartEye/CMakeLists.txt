@@ -12,4 +12,4 @@ add_subdirectory(camera)
 
 add_subdirectory(backend)
 
-
+add_subdirectory(proto)

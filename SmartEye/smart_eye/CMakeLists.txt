@@ -16,13 +16,16 @@ set(HEADERS
     threadSafeQueue.h
     logger.h
 )
-
+find_package(Threads)
 
 # Create the shared library
 add_library(smart_eye_lib SHARED STATIC ${SOURCES} ${HEADERS} )
 
 add_subdirectory(sqlite_files)
+
 target_link_libraries(smart_eye_lib PRIVATE sqlite_lib)
+
+target_link_libraries(smart_eye_lib PUBLIC proto_lib)
 
 
 ##################### opencv #######################
@@ -46,3 +49,32 @@ else()
     #find_package(spdlog REQUIRED)
     #target_link_libraries(${PROJECT_NAME} PRIVATE spdlog::spdlog)
 endif()
+
+
+###################add proto#################
+# find_package(protobuf CONFIG REQUIRED)
+# find_package(gRPC CONFIG REQUIRED)
+# 
+# set(PROTO_DIR ${CMAKE_CURRENT_SOURCE_DIR} "../proto_lib")
+# 
+# set(PROTOS ${PROTO_DIR} camera_proto.proto)
+
+
+
+
+# Generate protobuf files
+# protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${PROTOS})
+# Generate gRPC files
+# protobuf_generate_grpc_cpp(GRPC_SRCS GRPC_HDRS ${PROTOS})
+
+# target_link_libraries(smart_eye_lib ${PROTOBUF_LIBRARY} gRPC::grpc++)
+# target_link_libraries(smart_eye_lib
+#     PUBLIC
+#         proto_lib
+# )
+
+# target_link_libraries(smart_eye_lib PRIVATE 
+#     protobuf::libprotobuf
+#     gRPC::grpc
+#     gRPC::grpc++
+# )

@@ -169,7 +169,6 @@ std::vector<Detection> detectAndDraw(cv::Mat& frame, const std::vector<std::stri
 
 	// Display frame the detected objects
 	cv::imshow("output", frame);
-
 	return output;
 }
 

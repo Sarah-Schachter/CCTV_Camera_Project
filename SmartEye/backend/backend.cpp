@@ -10,23 +10,58 @@
 #include "../smart_eye/detection.h"
 #include "../smart_eye/YOLOdetection.h"
 #include "../smart_eye/calcAvarage.h"
+#include <grpcpp/grpcpp.h>
+#include <imageProto.grpc.pb.h>
 
+using grpc::Server;
+using grpc::ServerBuilder;
+using grpc::ServerContext;
+using grpc::Status;
+    
 using namespace std;
 
-int insertFrames(ThreadSafeQueue<cv::Mat>& frameQueue);
+
+
+int insertFrames(ThreadSafeQueue<cv::Mat>& frameQueue, cv::Mat image);
 void backendLogic(ThreadSafeQueue<cv::Mat>& frameQueue);
+int startServer(cv::Mat image);
+
+class CameraServiceImpl final : public image_proto::CameraService::Service {
+    Status SendImage(ServerContext* context, const image_proto::ImageRequest* request,
+        image_proto::ImageResponse* response) override {
+        cout << "image: " << request << endl;
+        std::vector<uchar> image_data(request->image_data().begin(), request->image_data().end());
+        cv::Mat image = cv::imdecode(image_data, cv::IMREAD_UNCHANGED);
+        int channels = image.channels();
+        std::cout << "Number of Channels: " << channels << std::endl;
+        startServer(image);
+        response->set_success(true);
+        return Status::OK;
+    }
+};
 
 
+void RunServer() {
+    std::string server_address("0.0.0.0:50051");
+    CameraServiceImpl service;
 
+    ServerBuilder builder;
+    builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
+    builder.RegisterService(&service);
+
+    std::unique_ptr<Server> server(builder.BuildAndStart());
+    std::cout << "Server listening on " << server_address << std::endl;
+    server->Wait();
+}
 ThreadSafeQueue<cv::Mat> frameQueue;
 
-int main()
+int startServer(cv::Mat image)
 {
     Logging::getFile()->info("backend begin");
 
     ThreadSafeQueue<cv::Mat> frameQueue;
-    
-    std::thread insertThread(insertFrames, std::ref(frameQueue));
+
+    std::thread insertThread(std::bind(insertFrames, std::ref(frameQueue), image));
     std::thread logicThread(backendLogic, std::ref(frameQueue));
 
     insertThread.join();
@@ -37,13 +72,9 @@ int main()
     return 1;
 }
 
-int insertFrames(ThreadSafeQueue<cv::Mat> &frameQueue)
+int insertFrames(ThreadSafeQueue<cv::Mat> &frameQueue, cv::Mat image)
 {
-    while (true)
-    {
-        // TODO: GRPC get frames
-        // insert to Q
-    }
+    frameQueue.push(image);
     return 1;
 }
 
@@ -62,21 +93,22 @@ void backendLogic(ThreadSafeQueue<cv::Mat> &frameQueue)
     float fps = -1;
     int total_frames = 0;
 
-    while (true)
-    {
         // pop from Q
-        frame = frameQueue.try_pop();
+    frame = frameQueue.try_pop();
 
         // detect objects and draw rectangles around
-        detections = detectAndDraw(frame, class_list, net, start, frame_count, fps, total_frames);
+    detections = detectAndDraw(frame, class_list, net, start, frame_count, fps, total_frames);
 
         // calc amd save Average
-        calcSaveDetectoins(frame, detections);
+    calcSaveDetectoins(frame, detections);
 
-        if (cv::waitKey(1) == -1)
-        {
-            Logging::getFile()->info("finished by user");
-            break;
-        }
+    if (cv::waitKey(1) == -1)
+    {
+        Logging::getFile()->info("finished by user");
     }
+    
+}
+int main() {
+    RunServer();
+    return 1;
 }
