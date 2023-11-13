@@ -2,8 +2,7 @@
 #include "CameraFunctions.h"
 
 
-#pragma region milestone 1 task 2 check differences
-
+// check if 2 frames are same
 bool isTheSameFrame(cv::Mat prev, cv::Mat current)
 {
 	int countChangePix = 100;
@@ -17,16 +16,16 @@ bool isTheSameFrame(cv::Mat prev, cv::Mat current)
 			cv::Vec3b pixel2 = current.at<cv::Vec3b>(row, col);
 
 			// Compare pixel values (for color images)
-			if (pixel1 != pixel2 && countChangePix > 0) {
+			if (pixel1 != pixel2 && countChangePix > 0)
+			{
 				// Pixels are different
 				countChangePix--;
 			}
 			else if (countChangePix == 0)
-				//the frame is diffrent
+				// the frame is diffrent
 				return false;
 		}
 	}
-	//the frame is the same
+	// the frame is the same
 	return true;
 }
-#pragma endregion
