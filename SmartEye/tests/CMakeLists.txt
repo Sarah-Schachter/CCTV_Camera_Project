@@ -4,18 +4,7 @@ set(TEST_SOURCES
     threadSafeQueueTest.cpp
 )
 
-add_executable(Tests ${TEST_SOURCES} "../smart_eye/sqlite_files/sqlite3.c")
-
+add_executable(Tests ${TEST_SOURCES} )
 
 # Link the main project library
-target_link_libraries(Tests PRIVATE SmartEye_lib)
-
-##################### opencv #######################
-if(WIN32)
-    set(OpenCV_DIR "C:\\opencv\\build")
-endif()
-link_directories(${OpenCV_LIBRARY_DIRS})
-find_package(OpenCV REQUIRED)
-include_directories(${OpenCV_INCLUDE_DIRS})
-
-target_link_libraries(Tests PUBLIC ${OpenCV_LIBS})
+target_link_libraries(Tests PUBLIC smart_eye_lib)

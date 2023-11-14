@@ -5,14 +5,6 @@
 #include <condition_variable>
 
 
-#ifdef _DEBUG
-#pragma comment(lib,"opencv_world480d.lib")
-#else
-#pragma comment(lib,"opencv_world480.lib")
-#endif // DEBUG
-
-
-
 template <typename T>
 class ThreadSafeQueue
 {
@@ -22,18 +14,13 @@ public:
 	T try_pop();
 	T back();
 	T front();
-	int size = 0;
+
 private:
 	std::queue<T> queue_;
 	mutable std::mutex mutex_;
 	std::condition_variable cond_;
 	size_t capacity_ = 5;
-
-	/*std::queue<T> queue_;
-	mutable std::mutex mutex_;
-	std::condition_variable cond_;*/
 };
-
 
 template class ThreadSafeQueue<cv::Mat>;
 

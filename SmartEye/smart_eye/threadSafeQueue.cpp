@@ -14,7 +14,6 @@ void ThreadSafeQueue<T>::push(const T& item)
 	queue_.push(item);
 	lock.unlock();
 	cond_.notify_one();
-
 }
 
 template <typename T>
@@ -28,6 +27,7 @@ T ThreadSafeQueue<T>::try_pop()
 	cond_.notify_one();
 	return item;
 }
+
 template <typename T>
 bool ThreadSafeQueue<T>::empty() const
 {

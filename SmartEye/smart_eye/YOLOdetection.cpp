@@ -1,5 +1,6 @@
 #include "YOLOdetection.h"
 
+using namespace cv;
 
 // Load the class list from a file
 std::vector<std::string> load_class_list()
@@ -118,8 +119,8 @@ void detect(cv::Mat& image, cv::dnn::Net& net, std::vector<Detection>& output, c
 }
 
 
-// Perform object detection on a single frame and draw 
-std::vector <Detection> detectOne(cv::Mat& frame, const std::vector<std::string>& class_list, cv::dnn::Net& net, std::chrono::steady_clock::time_point start, int& frame_count, float& fps, int& total_frames)
+// Perform object detection on a single frame and draw
+std::vector<Detection> detectAndDraw(cv::Mat& frame, const std::vector<std::string>& class_list, cv::dnn::Net& net, std::chrono::steady_clock::time_point start, int& frame_count, float& fps, int& total_frames)
 {
 	std::vector<Detection> output;
 
@@ -168,7 +169,6 @@ std::vector <Detection> detectOne(cv::Mat& frame, const std::vector<std::string>
 
 	// Display frame the detected objects
 	cv::imshow("output", frame);
-
 	return output;
 }
 
@@ -185,7 +185,6 @@ void fixBoxCoords(cv::Mat frame, Rect& box)
 	if (box.y + box.height > frame.size().height)
 		box.height = frame.size().height - box.y;
 }
-
 
 
 // this function is not in use now, it needs fixing

@@ -10,5 +10,5 @@ set(SQLITE_HEADERS
     sqlite3ext.h
 )
 
-add_library(SQLITE ${SQLITE_SOURCES} ${SQLITE_HEADERS})
-
+# Create a static library from the source files
+add_library(sqlite_lib STATIC ${SQLITE_SOURCES} ${SQLITE_HEADERS})
